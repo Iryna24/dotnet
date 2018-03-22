@@ -13,7 +13,6 @@ namespace HomeTask4
             try
             {
 
-
                 //text
 
                 int num1, num2;
