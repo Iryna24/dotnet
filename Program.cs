@@ -12,6 +12,9 @@ namespace HomeTask4
         {
             try
             {
+                
+                
+                //comment
                 int num1, num2;
                 Console.WriteLine("Please, enter first number: ");
                 num1 = Convert.ToInt32(Console.ReadLine());
