@@ -4,125 +4,65 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HT5
+namespace HomeTask4
 {
     class Program
     {
         static void Main(string[] args)
         {
-            
             try
             {
-                Console.WriteLine("Please, enter length of array:");
-                //MyArray.lengthOfArray = Convert.ToInt32(Console.ReadLine());
-                int lengthOfArray = Convert.ToInt32(Console.ReadLine());
+                int num1, num2;
+                Console.WriteLine("Please, enter first number: ");
+                num1 = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Please, enter second number: ");
+                num2 = Convert.ToInt32(Console.ReadLine());
 
-                MyArray myArray = new MyArray(lengthOfArray);
-
-                //for (int i = 0; i < MyArray.lengthOfArray; i++)
-                //{
-                //    Console.WriteLine("Please, enter " + i + " element of array:");
-                //    MyArray.ElementOfArray = Convert.ToInt32(Console.ReadLine());
-                //    myArray.array[i] = MyArray.ElementOfArray;
-                //}
-
-                for (int i = 0; i < lengthOfArray; i++)
-                {
-                    Console.WriteLine("Please, enter " + i + " element of array:");
-                    int ElementOfArray = Convert.ToInt32(Console.ReadLine());
-                    myArray.array[i] = ElementOfArray;
-                }
-
-                Console.WriteLine("Please, enter K value:");
-                int K = Convert.ToInt32(Console.ReadLine());
-               
-                myArray.ArithmeticalAverage(K);
-
-                Console.WriteLine("First element of array: "+ myArray.array[0]);
-                myArray.array[0] = K;
-                Console.WriteLine("Changed first element of array: " + myArray.array[0]);
-
+                Division division = new Division(num1, num2);
+                Console.WriteLine(num1 + " / " + num2 + " = " + division.Divide());
+            }
+            catch (InvalidCastException)
+            {
+                Console.WriteLine("Error: Invalid Cast Exception");
+            }
+            catch (DivideByZeroException)
+            {
+                Console.WriteLine("Error: It is not allowed to divide by zero");
             }
             catch (FormatException)
             {
-                Console.WriteLine("Error: enter integer number");
+                Console.WriteLine("Error: Format Exception");
             }
-            catch (OverflowException)
+            catch (OutOfMemoryException)
             {
-                Console.WriteLine("Overflow Exception: value is too long or too small");
+                Console.WriteLine("Error: value is too long");
             }
-            
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+           
             Console.ReadKey();
-            
         }
+
     }
 
-   class MyArray
+    public class Division
     {
-        public int lengthOfArray;
-       
-        //public int[] array = new int[lengthOfArray];
-        public int[] array;
+        int firstNum;
+        int secondNum;
 
-        public MyArray(int length)
+        public Division(int firstNum, int secondNum)
         {
-            array = new int[length];
-            lengthOfArray = length;
+            this.firstNum = firstNum;
+            this.secondNum = secondNum;
         }
-       
-        public void ArithmeticalAverage(int K)
-       {
-            int result = 0;
-            int divider = 0;
-            int sum = 0;
 
+        public int Divide()
+        {
+            var result = firstNum / secondNum;
             
-            for (int j = 0; j < lengthOfArray; j++)
-            {
-                if (K > 0)
-                {
-                    if (array[j] > 0 && array[j] > K)
-                    {
-                        sum = sum + array[j];
-                        divider = divider + 1;
-                    }
-
-                    result = sum / divider;
-
-                    
-                }
-                else
-                {
-                    if (array[j] < K)
-                    {
-                        result = result + array[j];
-                    }
-                    
-                }
-                
-            }
-            Console.WriteLine("Arithmetical Average for positive numbers from array is: " + result);
-
+            return result;
         }
-       
-
-
-
-
     }
 }
-
-
-
-
-
-//// 1) В программу вводится одномерный массив целых чисел. Вводится с клавиатуры – в
-//начале размер, потом по очереди элементы.При вводе необходимо отметить какой
-//элемент вводится.Ввод должен быть проверен на корректность, массив хранится в
-//отдельном классе, метод которого вычисляет среднее арифметическое положительных
-//элементов, значение которых больше К(также с клавиатуры) и заменить им первый
-//элемент массива.Показать первый элемент массива.
-
-//Расширить предыдущую программу путем ввода состояния расчета.Для
-//положительного К – оставляем алгоритм неизменным, для отрицательного – берем
-//сумму всех элементов, которые меньше К и заменяем ей первый элемент.
